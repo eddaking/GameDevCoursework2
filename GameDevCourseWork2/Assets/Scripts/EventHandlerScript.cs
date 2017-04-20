@@ -12,6 +12,7 @@ public class EventHandlerScript : MonoBehaviour {
     private float currentTime = 0;
     private List<GlobalVars.MoveObjInfo> currMovingObjs = new List<GlobalVars.MoveObjInfo>();
     private List<GlobalVars.MoveObjInfo> itemsToRemove = new List<GlobalVars.MoveObjInfo>();
+
     // Use this for initialization
     void Start()
     {
@@ -130,7 +131,7 @@ public class EventHandlerScript : MonoBehaviour {
         //flag 27 - princess@pos1
         //flag 28 - princess@pos2
         //flag 29 - princess@pos3
-        //flag 30 - rockinTripPos
+        //flag 30 - rockintrippos
         //
         GlobalVars.setFlagArray(new List<bool>(new bool[] { false, false, false, false, false, true, false, false, false, false, true, 
                                                             false, false, false, true, false, false, false, false, true, false,
