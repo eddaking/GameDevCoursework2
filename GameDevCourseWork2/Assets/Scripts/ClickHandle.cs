@@ -13,21 +13,23 @@ public class ClickHandle : MonoBehaviour
 
     void Update()
     {
-
-        //after a certain ammount of time unmark the clicked flags
-        //to provent bugs arising for click event being flagged before prerequisitis have been met.
-        timeSinceTrigger += Time.deltaTime;
-        if(timeSinceTrigger >= timeout)
+        if (timing)
         {
-            timeSinceTrigger = 0;
-            timing = false;
-            foreach (int i in flagsToFalse)
+            //after a certain ammount of time unmark the clicked flags
+            //to provent bugs arising for click event being flagged before prerequisitis have been met.
+            timeSinceTrigger += Time.deltaTime;
+            if (timeSinceTrigger >= timeout)
             {
-                GlobalVars.setFlag(i, true);
-            }
-            foreach (int i in flagsToTrue)
-            {
-                GlobalVars.setFlag(i, false);
+                timeSinceTrigger = 0;
+                timing = false;
+                foreach (int i in flagsToFalse)
+                {
+                    GlobalVars.setFlag(i, true);
+                }
+                foreach (int i in flagsToTrue)
+                {
+                    GlobalVars.setFlag(i, false);
+                }
             }
         }
     }
