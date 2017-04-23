@@ -27,6 +27,57 @@ public class EventHandlerScript : MonoBehaviour {
         }
     }
 
+    private void genLevel1()
+    {
+
+        Vector3 birdDoorLoc = new Vector3(0, 0, 0);
+        Vector3 behindCamera = new Vector3(0, 0, 0);
+        Vector3 dadInRoomPos = new Vector3(0, 0, 0);
+        Vector3 doorTextPos = new Vector3(0, 0, 0);
+        Vector3 doorOpenPos = new Vector3(0, 0, 0);
+        Vector3 windowThudPos = new Vector3(0, 0, 0);
+
+        //StoryEvent newSE = new StoryEvent(List < int > flagsRequiredTrue, List < int > flagsRequiredFalse, float startTimeTrig, float endTimeTrig, List < GameObject > targets, List < Vector3 > destinations, List < float > speeds, List < int > flagTrue, List < int > flagFalse)
+        StoryEvent birdFlyIn = new StoryEvent(new List<int>(new int[] { 2 }), new List<int>(new int[] { 15 }), 30, 35, new List<GameObject>(new GameObject[] { gameObjectsToReference[9] }), new List<Vector3>(new Vector3[] { birdDoorLoc }), new List<float>(new float[] { 20f }), new List<int>(new int[] { 15 }), new List<int>(new int[] {  }));
+        events.Add(birdFlyIn);
+        StoryEvent PFindBall = new StoryEvent(new List<int>(new int[] { 8, 3 }), new List<int>(new int[] { 9 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[1] }), new List<Vector3>(new Vector3[] { behindCamera }), new List<float>(new float[] { 10f }), new List<int>(new int[] { 9 }), new List<int>(new int[] { }));
+        events.Add(PFindBall);
+        StoryEvent PFindBonnet = new StoryEvent(new List<int>(new int[] { 6, 7 }), new List<int>(new int[] { 11 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[2] }), new List<Vector3>(new Vector3[] { behindCamera }), new List<float>(new float[] { 10f }), new List<int>(new int[] { 11 }), new List<int>(new int[] { }));
+        events.Add(PFindBonnet);
+        StoryEvent PFindClogs = new StoryEvent(new List<int>(new int[] { 12 }), new List<int>(new int[] { 10 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[3] }), new List<Vector3>(new Vector3[] { behindCamera }), new List<float>(new float[] { 10f }), new List<int>(new int[] { 10 }), new List<int>(new int[] { }));
+        events.Add(PFindClogs);
+        StoryEvent DadEnter = new StoryEvent(new List<int>(new int[] {  }), new List<int>(new int[] { 5, 16 }), 90, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12] }), new List<Vector3>(new Vector3[] { dadInRoomPos }), new List<float>(new float[] { 7f }), new List<int>(new int[] { 10 }), new List<int>(new int[] { }));
+        events.Add(DadEnter);
+        StoryEvent DadBreakDoor = new StoryEvent(new List<int>(new int[] { 5 }), new List<int>(new int[] { 14 }), 90, 91, new List<GameObject>(new GameObject[] { gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { doorTextPos }), new List<float>(new float[] { 5000f }), new List<int>(new int[] { 14 }), new List<int>(new int[] { }));
+        events.Add(DadBreakDoor);
+        StoryEvent DadOpenDoor = new StoryEvent(new List<int>(new int[] { 5, 14 }), new List<int>(new int[] { 16 }), 100, 101, new List<GameObject>(new GameObject[] { gameObjectsToReference[4], gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { doorOpenPos, dadInRoomPos }), new List<float>(new float[] { 5000f }), new List<int>(new int[] { 14 }), new List<int>(new int[] { }));
+        events.Add(DadOpenDoor);
+        StoryEvent BirdThudWindow = new StoryEvent(new List<int>(new int[] { }), new List<int>(new int[] { 2 }), 30, 31, new List<GameObject>(new GameObject[] { gameObjectsToReference[14]}), new List<Vector3>(new Vector3[] { windowThudPos }), new List<float>(new float[] { 5000f }), new List<int>(new int[] { 3 }), new List<int>(new int[] {  }));
+        events.Add(BirdThudWindow);
+        StoryEvent BirdThudWindowDisapear = new StoryEvent(new List<int>(new int[] { 13}), new List<int>(new int[] { 2 }), 32, 33, new List<GameObject>(new GameObject[] { gameObjectsToReference[4], gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { doorOpenPos, dadInRoomPos }), new List<float>(new float[] { 20f, 7f }), new List<int>(new int[] { 16 }), new List<int>(new int[] { 5, 14 }));
+        events.Add(BirdThudWindowDisapear);
+
+        //flag 0 - heap 1 moved
+        //flag 1 - heap 1 moved
+        //flag 2 - Window Opened
+        //flag 3 - bedside lamp on
+        //flag 4 - window opened
+        //flag 5 - Door Closed/locked
+        //flag 6 - eap 3 moved
+        //flag 7 - checking bed
+        //flag 8 - checking side of bed
+        //flag 9 - princess has ball
+        //flag 10 - princess has clogs
+        //flag 11 - princess has bonnet
+        //flag 12 - checking under bed
+        //flag 13 - bird thud
+        //flag 14 - dad unlocking door
+        //flag 15 - bird hit door
+        //flag 16 - dad in room
+        GlobalVars.setFlagArray(new List<bool>(new bool[] { true, false, false, false, false, false, false, false, false, false, false,
+                                                            false, false, false, false, false}));
+    }
+
     private void genLevel2()
     {
         //events
