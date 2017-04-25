@@ -30,20 +30,20 @@ public class EventHandlerScript : MonoBehaviour {
     private void genLevel1()
     {
 
-        Vector3 birdDoorLoc = new Vector3(0, 0, 0);
-        Vector3 behindCamera = new Vector3(0, 0, 0);
-        Vector3 dadInRoomPos = new Vector3(0, 0, 0);
-        Vector3 doorTextPos = new Vector3(0, 0, 0);
-        Vector3 doorOpenPos = new Vector3(0, 0, 0);
-        Vector3 doorClosePos = new Vector3(0, 0, 0);
-        Vector3 windowThudPos = new Vector3(0, 0, 0);
-        Vector3 heap1MovedPos = new Vector3(0, 0, 0);
-        Vector3 heap2MovedPos = new Vector3(0, 0, 0);
-        Vector3 heap3MovedPos = new Vector3(0, 0, 0);
-        Vector3 windowOPenPos = new Vector3(0, 0, 0);
-        Vector3 windowClosePos = new Vector3(0, 0, 0);
-        Vector3 princessBedPos = new Vector3(0, 0, 0);
-        Vector3 princessSideBedPos = new Vector3(0, 0, 0);
+        Vector3 birdDoorLoc = new Vector3(-9.9f, 3.3f, 21.3f);
+        Vector3 behindCamera = new Vector3(0, 5, 40);
+        Vector3 dadInRoomPos = new Vector3(-3.5f, 2.61f, 19f);
+        Vector3 doorTextPos = new Vector3(-11.7f, 4f, 15.9f);
+        Vector3 doorOpenPos = new Vector3(0.4f, -.55f, 1.74f);
+        Vector3 doorClosePos = new Vector3(0.6f, 0, 1.75f);
+        Vector3 windowThudPos = new Vector3(16, 4, 16);
+        Vector3 heap1MovedPos = new Vector3(1.8f, .2f, 16.6f);
+        Vector3 heap2MovedPos = new Vector3(-8f, 0.3f, 23.3f);
+        Vector3 heap3MovedPos = new Vector3(5.2f, 0.2f, 23.1f);
+        Vector3 windowOPenPos = new Vector3(9.5f, 2.7f, 22.5f);
+        Vector3 windowClosePos = new Vector3(10f, 2.77f, 21.3f);
+        Vector3 princessBedPos = new Vector3(2.7f, .32f, 10.84f);
+        Vector3 princessSideBedPos = new Vector3(4.3f, 0.3f, 10f);
 
         //StoryEvent newSE = new StoryEvent(List < int > flagsRequiredTrue, List < int > flagsRequiredFalse, float startTimeTrig, float endTimeTrig, List < GameObject > targets, List < Vector3 > destinations, List < float > speeds, List < int > flagTrue, List < int > flagFalse)
         StoryEvent birdFlyIn = new StoryEvent(new List<int>(new int[] { 2 }), new List<int>(new int[] { 15 }), 30, 35, new List<GameObject>(new GameObject[] { gameObjectsToReference[9] }), new List<Vector3>(new Vector3[] { birdDoorLoc }), new List<float>(new float[] { 20f }), new List<int>(new int[] { 15 }), new List<int>(new int[] {  }));
@@ -84,7 +84,7 @@ public class EventHandlerScript : MonoBehaviour {
         events.Add(princessMoveToBed);
 
         //flag 0 - heap 1 moved
-        //flag 1 - heap 1 moved
+        //flag 1 - heap 2 moved
         //flag 2 - Window Opened
         //flag 3 - bedside lamp on
         //flag 4 - window opened
