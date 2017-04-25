@@ -28,5 +28,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-Library
-/GameDevCourseWork2/Temp
+/GameDevCourseWork2/Library
