@@ -17,7 +17,7 @@ public class ClickHandle : MonoBehaviour
         //after a certain ammount of time unmark the clicked flags
         //to provent bugs arising for click event being flagged before prerequisitis have been met.
         timeSinceTrigger += Time.deltaTime;
-        if(timeSinceTrigger >= timeout)
+        if(timeSinceTrigger >= timeout && timing)
         {
             timeSinceTrigger = 0;
             timing = false;

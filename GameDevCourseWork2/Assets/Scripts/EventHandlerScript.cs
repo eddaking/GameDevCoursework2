@@ -122,6 +122,11 @@ public class EventHandlerScript : MonoBehaviour {
 
     private void genLevel2()
     {
+        Vector3 loveLoc = new Vector3(55.7f, 29, 33);
+        Vector3 ballLoc = new Vector3(-15, 6.3f, 16);
+        Vector3 KissLoc = new Vector3(-19, 0, 6);
+        Vector3 RemoveLoc = new Vector3(500f, 0f, 0f);
+
         //events
         //StoryEvent newSE = new StoryEvent(List < int > flagsRequiredTrue, List < int > flagsRequiredFalse, float startTimeTrig, float endTimeTrig, List < GameObject > targets, List < Vector3 > destinations, List < float > speeds, List < int > flagTrue, List < int > flagFalse)
         StoryEvent frogArmorDrop = 
@@ -134,13 +139,13 @@ public class EventHandlerScript : MonoBehaviour {
         new StoryEvent(new List<int>(new int[] { 3, 11 }), new List<int>(new int[] { 15 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[3], gameObjectsToReference[6], gameObjectsToReference[7] }), new List<Vector3>(new Vector3[] { new Vector3(113f, 40f, 92f), new Vector3(110f, 36.5f, 85f), new Vector3(102.5f, 37f, 79.5f) }), new List<float>(new float[] { 15f, 15f, float.MaxValue }), new List<int>(new int[] { 12, 15 }), new List<int>(new int[] { 3 }));
         events.Add(dropStalegSnake);
         StoryEvent dropStalegFrog = 
-        new StoryEvent(new List<int>(new int[] { 3, 6 }), new List<int>(new int[] { 15 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[3], gameObjectsToReference[5], gameObjectsToReference[7] }), new List<Vector3>(new Vector3[] { new Vector3(113f, 40f, 92f), new Vector3(109f, 32f, 85f), new Vector3(102.5f, 37f, 79.5f) }), new List<float>(new float[] { 15f, 15f, float.MaxValue }), new List<int>(new int[] { 21, 15 }), new List<int>(new int[] { 3 }));
+        new StoryEvent(new List<int>(new int[] { 3, 6 }), new List<int>(new int[] { 15 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[3], gameObjectsToReference[5], gameObjectsToReference[7], gameObjectsToReference[14] }), new List<Vector3>(new Vector3[] { new Vector3(113f, 40f, 92f), new Vector3(109f, 32f, 85f), new Vector3(102.5f, 37f, 79.5f), RemoveLoc }), new List<float>(new float[] { 15f, 15f, float.MaxValue, float.MaxValue }), new List<int>(new int[] { 21, 15 }), new List<int>(new int[] { 3 }));
         events.Add(dropStalegFrog);
         StoryEvent frogMove1ToCave =
-        new StoryEvent(new List<int>(new int[] { 5 }), new List<int>(new int[] {  }), 5, 7, new List<GameObject>(new GameObject[] { gameObjectsToReference[5] }), new List<Vector3>(new Vector3[] { new Vector3(109f, 38f, 85f) }), new List<float>(new float[] { 50f }), new List<int>(new int[] { 6 }), new List<int>(new int[] { 5 }));
+        new StoryEvent(new List<int>(new int[] { 5 }), new List<int>(new int[] {  }), 5, 7, new List<GameObject>(new GameObject[] { gameObjectsToReference[5], gameObjectsToReference[14] }), new List<Vector3>(new Vector3[] { new Vector3(109f, 38f, 85f), loveLoc }), new List<float>(new float[] { 50f, 70f }), new List<int>(new int[] { 6 }), new List<int>(new int[] { 5 }));
         events.Add(frogMove1ToCave);
         StoryEvent frogMove2ToRock1 =
-        new StoryEvent(new List<int>(new int[] { 6 }), new List<int>(new int[] { 21 }), 10, 11, new List<GameObject>(new GameObject[] { gameObjectsToReference[5] }), new List<Vector3>(new Vector3[] { new Vector3(90f, 31f, 92f) }), new List<float>(new float[] { 20f }), new List<int>(new int[] { 7 }), new List<int>(new int[] { 6 }));
+        new StoryEvent(new List<int>(new int[] { 6 }), new List<int>(new int[] { 21 }), 10, 11, new List<GameObject>(new GameObject[] { gameObjectsToReference[5], gameObjectsToReference[14] }), new List<Vector3>(new Vector3[] { new Vector3(90f, 31f, 92f), RemoveLoc }), new List<float>(new float[] { 20f, 5000f }), new List<int>(new int[] { 7 }), new List<int>(new int[] { 6 }));
         events.Add(frogMove2ToRock1);
         StoryEvent frogMove3ToRock2 = 
         new StoryEvent(new List<int>(new int[] { 7 }), new List<int>(new int[] { }), 11, 12, new List<GameObject>(new GameObject[] { gameObjectsToReference[5] }), new List<Vector3>(new Vector3[] { new Vector3(79f, 19f, 92f) }), new List<float>(new float[] { 20f }), new List<int>(new int[] { 8 }), new List<int>(new int[] { 7 }));
@@ -216,20 +221,21 @@ public class EventHandlerScript : MonoBehaviour {
         events.Add(princessLeaveBoring);
 
         StoryEvent moveTrip =
-        new StoryEvent(new List<int>(new int[] { 28, 30 }), new List<int>(new int[] { }), 11, 12, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { new Vector3(-24f,-1f,26.3f), new Vector3(10f, -11f, 26.3f)  }), new List<float>(new float[] { 7f, 10f }), new List<int>(new int[] { 32, 33 }), new List<int>(new int[] { 29 }));
+        new StoryEvent(new List<int>(new int[] { 28, 30 }), new List<int>(new int[] { }), 11, 12, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[13], gameObjectsToReference[15] }), new List<Vector3>(new Vector3[] { new Vector3(-24f,-1f,26.3f), new Vector3(10f, -11f, 26.3f), ballLoc  }), new List<float>(new float[] { 7f, 10f, float.MaxValue }), new List<int>(new int[] { 32, 33 }), new List<int>(new int[] { 29 }));
         events.Add(moveTrip);
 
         StoryEvent frogGetBall =
-        new StoryEvent(new List<int>(new int[] { 34, 20, 33, 32, 16 }), new List<int>(new int[] { }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { new Vector3(-22f, 2.5f, 26.3f) }), new List<float>(new float[] {20f }), new List<int>(new int[] {  }), new List<int>(new int[] { 32 }));
+        new StoryEvent(new List<int>(new int[] { 34, 20, 33, 32, 16 }), new List<int>(new int[] { }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[13], gameObjectsToReference[16] }), new List<Vector3>(new Vector3[] { new Vector3(-22f, 2.5f, 26.3f), KissLoc }), new List<float>(new float[] {20f, float.MaxValue }), new List<int>(new int[] {  }), new List<int>(new int[] { 32 }));
         events.Add(frogGetBall);
 
         StoryEvent princessLeave =
-        new StoryEvent(new List<int>(new int[] { 33, 35,16, 20 }), new List<int>(new int[] { 32 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[13] }), new List<Vector3>(new Vector3[] { PPos0, PPos0 + ballOffset }), new List<float>(new float[] { 10f, 10f }), new List<int>(new int[] { }), new List<int>(new int[] { 33 }));
+        new StoryEvent(new List<int>(new int[] { 33, 35,16, 20 }), new List<int>(new int[] { 32 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[13], gameObjectsToReference[15] }), new List<Vector3>(new Vector3[] { PPos0, PPos0 + ballOffset, RemoveLoc }), new List<float>(new float[] { 10f, 10f, float.MaxValue }), new List<int>(new int[] { }), new List<int>(new int[] { 33 }));
         events.Add(princessLeave);
 
         StoryEvent princessDrown =
-        new StoryEvent(new List<int>(new int[] { 33, 21 }), new List<int>(new int[] { }), 16, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12] }), new List<Vector3>(new Vector3[] { new Vector3(-9f, -19f, 26.3f) }), new List<float>(new float[] { 12f }), new List<int>(new int[] { 37 }), new List<int>(new int[] { }));
+        new StoryEvent(new List<int>(new int[] { 33, 21 }), new List<int>(new int[] { }), 16, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[15] }), new List<Vector3>(new Vector3[] { new Vector3(-9f, -19f, 26.3f), RemoveLoc }), new List<float>(new float[] { 12f, float.MaxValue }), new List<int>(new int[] { 37 }), new List<int>(new int[] { }));
         events.Add(princessDrown);
+        
 
         //flag 0 - click branch
         //flag 1 - click armour type
