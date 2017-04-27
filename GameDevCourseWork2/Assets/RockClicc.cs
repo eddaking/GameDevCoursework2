@@ -20,10 +20,9 @@ public class RockClicc : MonoBehaviour
         theend = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (theend)
+        if (theend && (transform.position != movePlace))
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, movePlace, step);

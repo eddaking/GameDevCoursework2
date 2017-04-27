@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EventHandlerScript : MonoBehaviour {
 
@@ -12,6 +14,68 @@ public class EventHandlerScript : MonoBehaviour {
     private float currentTime = 0;
     private List<GlobalVars.MoveObjInfo> currMovingObjs = new List<GlobalVars.MoveObjInfo>();
     private List<GlobalVars.MoveObjInfo> itemsToRemove = new List<GlobalVars.MoveObjInfo>();
+
+    public bool ending = false;
+
+    private class EndState {
+
+        private List<int> reqTrue;
+        private List<int> reqFalse;
+        private string endText;
+        private bool goodEnding;
+
+        public EndState(List<int> reqTrue, List<int> reqFalse, string endText, bool goodEnding)
+        {
+            this.reqTrue = reqTrue;
+            this.reqFalse = reqFalse;
+            this.endText = endText;
+            this.goodEnding = goodEnding;
+        }
+
+        public bool checkEnded()
+        {
+            if (reqTrue.Count != 0)
+            {
+                foreach (int flag in reqTrue)
+                {
+                    if (!GlobalVars.getFlag(flag))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (reqFalse.Count != 0)
+            {
+                foreach (int flag in reqFalse)
+                {
+                    if (GlobalVars.getFlag(flag))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        
+        public bool rightEnding()
+        {
+            return goodEnding;
+        }
+
+        public string getEndText()
+        {
+            return endText;
+        }
+
+    }
+
+    private List<EndState> endings = new List<EndState>();
+
+    private float timeSinceEndingTripped = 0;
+
+    public string nextLevelName;
 
     // Use this for initialization
     void Start()
@@ -88,6 +152,14 @@ public class EventHandlerScript : MonoBehaviour {
         events.Add(princessMoveToBedSide);
         StoryEvent turnOnLight = new StoryEvent(new List<int>(new int[] { 23 }), new List<int>(new int[] { 3 }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[8] }), new List<Vector3>(new Vector3[] { bedsideTablePos }), new List<float>(new float[] { 5000f }), new List<int>(new int[] { 3 }), new List<int>(new int[] { 23 }));
         events.Add(turnOnLight);
+
+        EndState dadEnters = new EndState(new List<int>( new int[] { 16 } ), new List<int>(), "Father aks the Princess to do her Chores, No adventures Today. The End", false);
+        endings.Add(dadEnters);
+        EndState birdEnters = new EndState(new List<int>(new int[] { 15 }), new List<int>(), "Upon finding the dead Bird the princess embarks upon a disection project within the safety of the castle. No adventures today", false);
+        endings.Add(birdEnters);
+        EndState PrincessLeaves = new EndState(new List<int>(new int[] { 15 }), new List<int>(), "Having Found her ball, the princess decideds to go for a walk with it, what adventures await her?", true);
+        endings.Add(PrincessLeaves);
+
 
         //flag 0 - heap 1 moved
         //flag 1 - heap 2 moved
@@ -310,20 +382,60 @@ public class EventHandlerScript : MonoBehaviour {
         GlobalVars.setFlagArray(new List<bool>(new bool[] { true, false, false, false, false, false, false, false }));
     }
 
+    private EndState theEnding;
+    public Text storyText;
+    public Button nextBtn;
+    public GameObject canvas;
+
     void Update () {
-        currentTime += Time.deltaTime;
-        //check for any events triggered
-		foreach( StoryEvent e in events)
+
+        if (!ending)
         {
-            if (e.allTriggersMet(currentTime))
+
+            foreach (EndState end in endings)
             {
-                e.updateFlags();
-                currMovingObjs.AddRange(e.getActions());
+                if (end.checkEnded())
+                {
+                    ending = true;
+                    theEnding = end;
+                    break;
+                }
+            }
+
+            currentTime += Time.deltaTime;
+            //check for any events triggered
+            foreach (StoryEvent e in events)
+            {
+                if (e.allTriggersMet(currentTime))
+                {
+                    e.updateFlags();
+                    currMovingObjs.AddRange(e.getActions());
+                }
+            }
+        }
+        else
+        {
+            if (timeSinceEndingTripped >= 3)
+            {
+                storyText.text = theEnding.getEndText();
+                canvas.SetActive(true);
+                if (theEnding.rightEnding())
+                {
+                    nextBtn.gameObject.SetActive(true);
+                }
+                else
+                {
+                    nextBtn.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                timeSinceEndingTripped += Time.deltaTime;
             }
         }
 
         //moveObjects
-        foreach(GlobalVars.MoveObjInfo action in currMovingObjs)
+        foreach (GlobalVars.MoveObjInfo action in currMovingObjs)
         {
             float step = action.getSpeed() * Time.deltaTime;
             Vector3 newLoc = Vector3.MoveTowards(action.getObject().transform.position, action.getDestination(), step);
@@ -338,32 +450,18 @@ public class EventHandlerScript : MonoBehaviour {
             currMovingObjs.Remove(action);
         }
         itemsToRemove.Clear();
-	}
 
-    private void readFile(string fileLoc)
-    { 
-        string line;
-        StreamReader myStreamReader = new StreamReader(fileLoc);
+    }
 
-        using (myStreamReader)
-        {
-            while(true)
-            {
-                line = myStreamReader.ReadLine();
+    public void nextLevel()
+    {
+        SceneManager.LoadScene(nextLevelName);
+    }
 
-                if (line != null)
-                {
-                    string[] entries = line.Split(',');
-                    if (entries.Length > 0) { }
-                    //core read in functionality
-                }
-                else
-                {
-                    break;
-                }
-            }
-            myStreamReader.Close();
-        }
+    public void restartLevel()
+    {
+        canvas.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

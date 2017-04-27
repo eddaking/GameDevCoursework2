@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
@@ -65,7 +66,7 @@ public class Pause : MonoBehaviour
         startingPlace = character.transform.position;
         panel.SetActive(false);
         description.enabled = false;
-        tut1 = "Hi, welcome to <insrt game name>, this is a short tutorial to help you understand how to play!";
+        tut1 = "Hi, welcome to 'Ascended being simulator 2017', this is a short tutorial to help you understand how to play!";
         tut2 = "In this game you are an omnipotenet being (not really,... but kinda).";
         tut3 = "You get to mess around with certain things within the environment to change the course of events set in place.";
         tut4 = "There are many ways to win, but many ways to lose. Create one of the desired outcomes to complete the level!";
@@ -210,12 +211,19 @@ public class Pause : MonoBehaviour
         }
     }
 
+
+    float elapsedTIme = 0;
+    float waitTime = 3;
+
     void End()
     {
-        if(!callTheEnd)
+        if (elapsedTIme >= waitTime)
         {
-           // END THE SCENE, MAYBE FADE TO BLACK
-            callTheEnd = true;
+            SceneManager.LoadScene("Scenes/Scene0_Tutorial");
+        }
+        else
+        {
+            elapsedTIme += Time.deltaTime;
         }
 
     }

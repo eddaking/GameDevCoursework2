@@ -9,7 +9,8 @@ public class UnderRockScript : MonoBehaviour {
     {
         charInBox = false;
     }
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Character")
         {
