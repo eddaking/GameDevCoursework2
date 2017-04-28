@@ -146,7 +146,7 @@ public class EventHandlerScript : MonoBehaviour {
         events.Add(CloseDoor);
         StoryEvent OpenDoor = new StoryEvent(new List<int>(new int[] { 21, 5 }), new List<int>(new int[] { }), 0, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[4] }), new List<Vector3>(new Vector3[] { doorOpenPos }), new List<float>(new float[] { 7f }), new List<int>(new int[] {  }), new List<int>(new int[] { 5, 21 }));
         events.Add(OpenDoor);
-        StoryEvent princessMoveToBed = new StoryEvent(new List<int>(new int[] { 22 }), new List<int>(new int[] { }), 5, 6, new List<GameObject>(new GameObject[] { gameObjectsToReference[0] }), new List<Vector3>(new Vector3[] { princessBedPos }), new List<float>(new float[] { 7f }), new List<int>(new int[] { 7 }), new List<int>(new int[] { 22 }));
+        StoryEvent princessMoveToBed = new StoryEvent(new List<int>(new int[] { 22 }), new List<int>(new int[] { }), 5, 6, new List<GameObject>(new GameObject[] { gameObjectsToReference[0], gameObjectsToReference[15] }), new List<Vector3>(new Vector3[] { princessBedPos, behindCamera }), new List<float>(new float[] { 7f, float.MaxValue }), new List<int>(new int[] { 7 }), new List<int>(new int[] { 22 }));
         events.Add(princessMoveToBed);
         StoryEvent princessMoveToBedSide = new StoryEvent(new List<int>(new int[] { 7 }), new List<int>(new int[] { }), 25, 26, new List<GameObject>(new GameObject[] { gameObjectsToReference[0] }), new List<Vector3>(new Vector3[] { princessSideBedPos }), new List<float>(new float[] { 7f }), new List<int>(new int[] { 8 }), new List<int>(new int[] { 7 }));
         events.Add(princessMoveToBedSide);
@@ -157,7 +157,7 @@ public class EventHandlerScript : MonoBehaviour {
         endings.Add(dadEnters);
         EndState birdEnters = new EndState(new List<int>(new int[] { 15 }), new List<int>(), "Upon finding the dead Bird the princess embarks upon a disection project within the safety of the castle. No adventures today", false);
         endings.Add(birdEnters);
-        EndState PrincessLeaves = new EndState(new List<int>(new int[] { 15 }), new List<int>(), "Having Found her ball, the princess decideds to go for a walk with it, what adventures await her?", true);
+        EndState PrincessLeaves = new EndState(new List<int>(new int[] { 9 }), new List<int>(), "Having Found her ball, the princess decideds to go for a walk with it, what adventures await her?", true);
         endings.Add(PrincessLeaves);
 
 
@@ -307,7 +307,18 @@ public class EventHandlerScript : MonoBehaviour {
         StoryEvent princessDrown =
         new StoryEvent(new List<int>(new int[] { 33, 21 }), new List<int>(new int[] { }), 16, float.MaxValue, new List<GameObject>(new GameObject[] { gameObjectsToReference[12], gameObjectsToReference[15] }), new List<Vector3>(new Vector3[] { new Vector3(-9f, -19f, 26.3f), RemoveLoc }), new List<float>(new float[] { 12f, float.MaxValue }), new List<int>(new int[] { 37 }), new List<int>(new int[] { }));
         events.Add(princessDrown);
-        
+
+        EndState drownAndDeath = new EndState(new List<int>(new int[] { 37, 21 }), new List<int>(), "The princess drowns trying to retrieve her ball, and the prince was killed by a hungry iguana. ", false);
+        endings.Add(drownAndDeath);
+        EndState drownAndLive = new EndState(new List<int>(new int[] { 37 }), new List<int>(new int[] { 21 }), "The prince watches on helplessly as his true love drowns, well time to find another i suppose", false);
+        endings.Add(drownAndLive);
+        EndState boringExitandDie = new EndState(new List<int>(new int[] { 31, 21 }), new List<int>(new int[] { } ), "The princess returns home to join her fathers compay in a middle management position. Oh and the prince died, but no-one cared about that right?", false);
+        endings.Add(boringExitandDie);
+        EndState boringExitandLive = new EndState(new List<int>(new int[] { 31 }), new List<int>(new int[] { 21 }), "The princess returns home to join her fathers compay in a middle management position. Oh and the prince failed to catch his ture love, but eating flies is cool, right?", false);
+        endings.Add(boringExitandLive);
+        EndState goodEnding = new EndState(new List<int>(new int[] { 33, 35, 16, 20 }), new List<int>(new int[] {  }), "The Princess returns home with her ball, the frog chases after her, steals a kiss and lives happily ever after", true);
+        endings.Add(goodEnding);
+
 
         //flag 0 - click branch
         //flag 1 - click armour type
@@ -386,6 +397,7 @@ public class EventHandlerScript : MonoBehaviour {
     public Text storyText;
     public Button nextBtn;
     public GameObject canvas;
+    public Text nextBtnTExt;
 
     void Update () {
 
@@ -422,6 +434,10 @@ public class EventHandlerScript : MonoBehaviour {
                 if (theEnding.rightEnding())
                 {
                     nextBtn.gameObject.SetActive(true);
+                    if (theEnding.getEndText() == "The Princess returns home with her ball, the frog chases after her, steals a kiss and lives happily ever after")
+                    {
+                        nextBtnTExt.text = "Restart Game?";
+                    }
                 }
                 else
                 {
